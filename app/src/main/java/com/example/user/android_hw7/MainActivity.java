@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             URL url = new URL(hotelImage);
             Bitmap bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            return bm;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (msg.what) {
                     case LIST_HOTELS:
                         List<Hotel> hotels = (List<Hotel>) msg.obj;
-//                        refreshHotelList(hotels);
+                        refreshHotelList(hotels);
                         break;
                 }
             }
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 Message message = new Message();
                 message.what = LIST_HOTELS;
                 message.obj = lsHotels;
-                handler.handleMessage(message);
+                handler.sendMessage(message);
             }
         }
     }
